@@ -54,12 +54,12 @@ public class TAG_File {
   double r2 = (connected.get(1)).Request_Distance();
   double r3 = (connected.get(2)).Request_Distance();
   
-  x_est += (x2-x3)*((Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,r2)-Math.pow(2,r1)));
-  x_est -= ((x1-x2)*((Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
-  x_est /= (2*((y1-y2)*(x2-x3)-(y2-y3)*(x1-x2)));
-  y_est += (y2-y3)*((Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,r2)-Math.pow(2,r1)));
-  y_est -= ((y1-y2)*((Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
-  y_est /= (2*((x1-x2)*(y2-y3)-(x2-x3)*(y1-y2)));
+  y_est += (x2-x3)*((Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,r1)-Math.pow(2,r2)));
+  y_est -= ((x1-x2)*((Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
+  y_est /= (2*((y1-y2)*(x2-x3)-(y2-y3)*(x1-x2)));
+  x_est += (y2-y3)*((Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,r1)-Math.pow(2,r2)));
+  x_est -= ((y1-y2)*((Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
+  x_est /= (2*((x1-x2)*(y2-y3)-(x2-x3)*(y1-y2)));
   
   Tag_color = color(0,255,0);
   fill(Tag_color);
