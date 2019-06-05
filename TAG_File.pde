@@ -39,15 +39,31 @@ public class TAG_File {
   
  public void calculate_point()
  {
+   color Tag_color = color(255,204,0);
+   fill(Tag_color);
+   stroke(255, 204, 0);
+   ellipse(x_est/pixel_bred , y_est/pixel_leng , 20 ,20);
+   
   float x1 = (connected.get(0)).XCor; 
   float y1 = (connected.get(0)).YCor; 
   float x2 = (connected.get(1)).XCor; 
-  float y2 = (connected.get(1)).XCor;
+  float y2 = (connected.get(1)).YCor;
+  float x3 = (connected.get(2)).XCor;
+  float y3 = (connected.get(2)).YCor;
   double r1 = (connected.get(0)).Request_Distance();
   double r2 = (connected.get(1)).Request_Distance();
+  double r3 = (connected.get(2)).Request_Distance();
   
-  x_est = (x2-x3)*((Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,r2)-Math.pow(2,r1)));
-  x_est -= ((y1-y2)*((Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,r2)-Math.pow(2,r1)))
+  x_est += (x2-x3)*((Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,r2)-Math.pow(2,r1)));
+  x_est -= ((x1-x2)*((Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
+  x_est /= (2*((y1-y2)*(x2-x3)-(y2-y3)*(x1-x2)));
+  y_est += (y2-y3)*((Math.pow(2,y2)-Math.pow(2,y1)) + (Math.pow(2,x2)-Math.pow(2,x1)) + (Math.pow(2,r2)-Math.pow(2,r1)));
+  y_est -= ((y1-y2)*((Math.pow(2,y3)-Math.pow(2,y2)) + (Math.pow(2,x3)-Math.pow(2,x2)) + (Math.pow(2,r2)-Math.pow(2,r3))));
+  y_est /= (2*((x1-x2)*(y2-y3)-(x2-x3)*(y1-y2)));
+  
+  Tag_color = color(0,255,0);
+  fill(Tag_color);
+  ellipse(x_est/pixel_bred , y_est/pixel_leng , 20 ,20);
  }
   
   private void sorting()
@@ -67,7 +83,7 @@ public class TAG_File {
     }
   }
   
-   public void print()
+  public void print()
   {  
     println("Index Tag: " + tags.get(index));
     for (int i=0; i<connected.size(); i++)
@@ -83,7 +99,5 @@ public class TAG_File {
   public void Anchor_Connected()
   {
     println("Anchor_Connected :-" + connected.size());
-  }
-
-  
+  } 
 }
