@@ -15,7 +15,7 @@ public class Anchor  {
    this.n = n;
    this.A = A;
    fill(this.Anchor_color);
-   ellipse(this.Anchor_X , this.Anchor_Y , 50 ,50);
+   ellipse(this.Anchor_X/pixel_bred , this.Anchor_Y/pixel_leng , 50 ,50);
   }
  
   public float Request_n()
@@ -25,7 +25,7 @@ public class Anchor  {
   
   public float Request_A()
   {
-   return(this.n);
+   return(this.A);
   }
   
   public String requestAnchorMAC()
@@ -42,4 +42,12 @@ public class Anchor  {
   {
    return(this.Anchor_Y); 
   } 
+
+  public void print()
+  {
+   println("Anchor MAC: "+this.Anchor_MAC);
+   println("X: "+this.Anchor_X," Y: ",Anchor_Y);
+   println("N: "+this.n);
+   println("A: "+this.A);
+  }
 }

@@ -11,8 +11,8 @@ import java.lang.Math;
 
 Serial port;
 
-float breadth = 1463.04;
-float leng = 1097.28;
+float breadth = 1000;
+float leng = 1000;
 float pixel_bred = (breadth/500);
 float pixel_leng = (leng/500);
 
@@ -34,7 +34,7 @@ void setup()
   background(255, 204, 0);
   port = new Serial(this, COM_PORT, 38400);
   
-  String File = "/home/kshitiz/sketchbook/Localisation_Using_RSSI_Kethod/anchor.csv";
+  String File = "/home/kshitiz/sketchbook/Localisation_Using_RSSI_Method_2/anchor.csv";
   BufferedReader br = null;
   String line = "";
   String cvsSplitBy = ",";
@@ -65,7 +65,7 @@ void setup()
     }
   }
   
-  File = "/home/kshitiz/sketchbook/Localisation_Using_RSSI_kethod/tag.csv";
+  File = "/home/kshitiz/sketchbook/Localisation_Using_RSSI_Method_2/tag.csv";
   br = null;
   line = "";
   cvsSplitBy = ",";
@@ -95,6 +95,20 @@ void setup()
       }
     }
   }
+  
+ for(int i=0 ; i<anchors.size(); i++)
+ {
+  Anchor anchor_ref = anchors.get(i);
+  anchor_ref.print();
+ }
+ 
+ for (int i=0; i<tags.size(); i++)
+  {
+    //   println(tags.get(i));
+    TAG_File tag_data_ref = new TAG_File(i);
+    Tags_Data.add(tag_data_ref);
+  }
+ 
 }
 
 void draw()
@@ -128,7 +142,7 @@ void serial2Event(Serial port)
         println("Failure0");
       }
     }
-
+/*
     if (byte_received <= 8 && error_status)
     {
       if (byte_received != 7)
@@ -150,7 +164,7 @@ void serial2Event(Serial port)
       }
       crc = 0;
     }
-    
+  */  
     if (byte_received == 41)
     {
 
@@ -166,15 +180,15 @@ void serial2Event(Serial port)
         Anchor anchor_ref = anchors.get(index_anchor);
         if ((Anchor_address).equals(anchor_ref.requestAnchorMAC()))
         {
+          println("Index:"+index_tag);
           if (index_tag != -1) 
             (Tags_Data.get(index_tag)).addition(index_anchor, RSSI);
           //        println("Matched With:"+anchor_ref.requestAnchorMAC());
           break;
         }
       }
-      if (index_tag != -1) 
-      (Tags_Data.get(index_tag)).print();
+      if(index_tag != -1)
+        (Tags_Data.get(index_tag)).print();
     }
   }
 }
-    
